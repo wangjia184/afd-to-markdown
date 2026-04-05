@@ -7,7 +7,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Currently following components need hosting and here are some initial thoughts on each of them"
+          "text": "The following services need deployment targets. This document lists each component and rough hosting notes for planning."
         }
       ]
     },
@@ -16,7 +16,7 @@
       "attrs": {
         "isNumberColumnEnabled": false,
         "layout": "align-start",
-        "localId": "5ed9e9e8-8639-453c-8746-403f44ba8d5b"
+        "localId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
       },
       "content": [
         {
@@ -31,7 +31,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "evolo-web"
+                      "text": "acme-marketing-site"
                     }
                   ]
                 }
@@ -46,7 +46,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Holds Website Project evolo.at"
+                      "text": "Public marketing site (example.com)."
                     }
                   ]
                 }
@@ -61,7 +61,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Currently not using a backend at all, but will add for translations and a few other reasons"
+                      "text": "Static hosting is enough today; add a small API later for localization and form handling."
                     }
                   ]
                 },
@@ -84,7 +84,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "evolo-auth"
+                      "text": "acme-platform-api"
                     }
                   ]
                 }
@@ -99,7 +99,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Includes Core API, Auth and Admin UI"
+                      "text": "Core REST API, authentication, and internal admin UI."
                     }
                   ]
                 }
@@ -114,7 +114,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Needs refactoring, no more monolith structure"
+                      "text": "Split the monolith into smaller deployable units before the next release."
                     }
                   ]
                 },
@@ -123,7 +123,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Project name evolo-core for server"
+                      "text": "Backend service name: acme-core-api"
                     }
                   ]
                 },
@@ -132,7 +132,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Project name evolo-admin-ui for client (maybe host dist only like website currently is but will probably need api on same port so we will need to host it like jsongen)"
+                      "text": "Admin UI: ship static assets from CI; consider same origin as API for cookies in production."
                     }
                   ]
                 }
@@ -152,7 +152,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "evolo-redis"
+                      "text": "session-cache"
                     }
                   ]
                 }
@@ -167,7 +167,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Currently used as localhost setup"
+                      "text": "In-memory cache for sessions and rate limits (dev only today)."
                     }
                   ]
                 }
@@ -182,7 +182,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Might consider hosting on a dedicated server but will probably host together with evolo-auth"
+                      "text": "Either a managed cache in staging/prod or colocate with the platform API until traffic grows."
                     }
                   ]
                 }
@@ -202,7 +202,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "evolo-mail"
+                      "text": "notification-sender"
                     }
                   ]
                 }
@@ -217,7 +217,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Includes Email API, curerntly not using a database"
+                      "text": "Outbound email and webhook worker; stateless, no database yet."
                     }
                   ]
                 }
@@ -232,7 +232,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Host on single server for now, will probably upgrade to a loadbalanced setup lateron"
+                      "text": "Single VM or container group for now; plan for horizontal scaling when queue depth increases."
                     }
                   ]
                 }
@@ -252,7 +252,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "database"
+                      "text": "primary-database"
                     }
                   ]
                 }
@@ -267,7 +267,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Standalone database server"
+                      "text": "Relational store for product data and users."
                     }
                   ]
                 }
@@ -282,7 +282,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "Look into master/slave setup"
+                      "text": "Evaluate read replicas and automated backups before go-live."
                     }
                   ]
                 }
