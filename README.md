@@ -77,7 +77,7 @@ const markdown = converter.convert(adfDocument);
 - ✅ Horizontal rules
 - ✅ Tables (with headers)
 - ✅ Panels (info, warning, error, success)
-- ✅ Media (images)
+- ✅ Media — images (`mediaSingle`) and file attachments (`mediaGroup`)
 - ✅ Expand sections (collapsible)
 - ✅ Decision lists
 
@@ -173,7 +173,7 @@ Content here
 
 ## Limitations
 
-- **Media nodes**: Converted to markdown image syntax with `media://` URLs. You may need to replace these with actual image URLs.
+- **Media nodes**: Converted to markdown image syntax with `media://` URLs. You may need to replace these with actual image URLs. A `mediaGroup` (file attachments such as PDFs/docs) renders as a bullet list, one item per attachment: `- ![alt](media://<id>)` for items with alt text (images), or `- [file : <id>](media://<id>)` otherwise. The `media://` URL is a placeholder — per the ADF spec the node carries only a Media Services `id`, so the caller must resolve the real URL/filename via the Media API.
 - **Text color**: Preserved using HTML `<span style="color: ...">` tags.
 - **Underline**: Preserved using HTML `<u>` tags (not standard markdown).
 - **Subscript/Superscript**: Preserved using HTML `<sub>` and `<sup>` tags.

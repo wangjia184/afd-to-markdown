@@ -65,6 +65,8 @@ export class ADFToMarkdownConverter {
         return this.convertPanel(node);
       case "mediaSingle":
         return this.convertMediaSingle(node);
+      case "mediaGroup":
+        return this.convertMediaGroup(node);
       case "media":
         return this.convertMedia(node);
       case "expand":
@@ -282,6 +284,30 @@ export class ADFToMarkdownConverter {
       return this.convertMedia(media);
     }
     return "";
+  }
+
+  private convertMediaGroup(node: ADFNode): string {
+    const items = node.content || [];
+    if (items.length === 0) {
+      return "";
+    }
+    const lines = items.map((item) => `- ${this.renderMediaItem(item)}`);
+    return lines.join("\n") + "\n\n";
+  }
+
+  // Render a single media item. Images (with `alt`) reuse the mediaSingle
+  // image syntax; files without `alt` become a downloadable link keyed by
+  // the Media Services id (the only identifier the node carries).
+  // url is computed once and shared by both branches so the no-id fallback
+  // (empty parens) is identical for images and files.
+  private renderMediaItem(node: ADFNode): string {
+    const id = node.attrs?.id || "";
+    const alt = node.attrs?.alt;
+    const url = id ? `media://${id}` : "";
+    if (alt) {
+      return `![${alt}](${url})`;
+    }
+    return `[file : ${id}](${url})`;
   }
 
   private convertMedia(node: ADFNode): string {
